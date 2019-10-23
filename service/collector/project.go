@@ -29,7 +29,8 @@ func (p *Project) Collect(ch chan<- prometheus.Metric) error {
 	ch <- prometheus.MustNewConstMetric(
 		projectInfo,
 		prometheus.GaugeValue,
-		project.Bundle_version(),
+		1,
+		project.BundleVersion(),
 		project.GitSHA(),
 		project.Name(),
 		project.Version(),
