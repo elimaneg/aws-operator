@@ -40,6 +40,6 @@ func (p *Project) Collect(ch chan<- prometheus.Metric) error {
 }
 
 func (p *Project) Describe(ch chan<- *prometheus.Desc) error {
-	ch <- projectDesc
+	ch <- projectInfo
 	return nil
 }
