@@ -92,6 +92,11 @@ func NewSet(config SetConfig) (*Set, error) {
 		}
 	}
 
+	var projectCollector *Project
+	{
+		projectCollector = NewProject()
+	}
+
 	var trustedAdvisorCollector *TrustedAdvisor
 	{
 		c := TrustedAdvisorConfig{
@@ -127,6 +132,7 @@ func NewSet(config SetConfig) (*Set, error) {
 				asgCollector,
 				ec2InstancesCollector,
 				elbCollector,
+				projectCollector,
 				vpcCollector,
 			},
 			Logger: config.Logger,
