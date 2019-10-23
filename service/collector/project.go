@@ -22,6 +22,7 @@ type Project struct {
 }
 
 func NewProject() *Project {
+	return &Project{}
 }
 
 func (p *Project) Collect(ch chan<- prometheus.Metric) error {
