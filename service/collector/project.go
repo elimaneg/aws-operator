@@ -1,6 +1,8 @@
 package collector
 
 import (
+	"github.com/giantswarm/aws-operator/pkg/project"
+
 	"github.com/prometheus/client_golang/prometheus"
 )
 
