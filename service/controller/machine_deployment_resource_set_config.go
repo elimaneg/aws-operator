@@ -32,7 +32,8 @@ type machineDeploymentResourceSetConfig struct {
 	GuestPublicSubnetMaskBits  int
 	GuestSubnetMaskBits        int
 	HostAWSConfig              aws.Config
-	IgnitionPath               string
+	IgnitionAdditionPaths      []string
+	IgnitionBasePath           string
 	ImagePullProgressDeadline  string
 	InstallationName           string
 	IPAMNetworkRange           net.IPNet

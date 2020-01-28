@@ -33,7 +33,8 @@ type MachineDeploymentConfig struct {
 	GuestPublicSubnetMaskBits  int
 	GuestSubnetMaskBits        int
 	HostAWSConfig              aws.Config
-	IgnitionPath               string
+	IgnitionAdditionPaths      []string
+	IgnitionBasePath           string
 	ImagePullProgressDeadline  string
 	InstallationName           string
 	IPAMNetworkRange           net.IPNet
@@ -164,7 +165,8 @@ func newMachineDeploymentResourceSets(config MachineDeploymentConfig) ([]*contro
 			GuestPublicSubnetMaskBits:  config.GuestPublicSubnetMaskBits,
 			GuestSubnetMaskBits:        config.GuestSubnetMaskBits,
 			HostAWSConfig:              config.HostAWSConfig,
-			IgnitionPath:               config.IgnitionPath,
+			IgnitionAdditionPaths:      config.IgnitionAdditionPaths,
+			IgnitionBasePath:           config.IgnitionBasePath,
 			ImagePullProgressDeadline:  config.ImagePullProgressDeadline,
 			InstallationName:           config.InstallationName,
 			IPAMNetworkRange:           config.IPAMNetworkRange,

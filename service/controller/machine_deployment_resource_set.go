@@ -103,7 +103,7 @@ func newMachineDeploymentResourceSet(config machineDeploymentResourceSetConfig) 
 				CalicoSubnet:              config.CalicoSubnet,
 				ClusterIPRange:            config.ClusterIPRange,
 				DockerDaemonCIDR:          config.DockerDaemonCIDR,
-				IgnitionPath:              config.IgnitionPath,
+				IgnitionBasePath:          config.IgnitionBasePath,
 				ImagePullProgressDeadline: config.ImagePullProgressDeadline,
 				NetworkSetupDockerImage:   config.NetworkSetupDockerImage,
 				PodInfraContainerImage:    config.PodInfraContainerImage,

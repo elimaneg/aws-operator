@@ -8,7 +8,7 @@ import (
 	infrastructurev1alpha2 "github.com/giantswarm/apiextensions/pkg/apis/infrastructure/v1alpha2"
 	g8sv1alpha1 "github.com/giantswarm/apiextensions/pkg/apis/provider/v1alpha1"
 	"github.com/giantswarm/certs"
-	k8scloudconfig "github.com/giantswarm/k8scloudconfig/v_4_9_0"
+	k8scloudconfig "github.com/giantswarm/k8scloudconfig/v_5_1_0"
 	"github.com/giantswarm/microerror"
 	"github.com/giantswarm/randomkeys"
 
@@ -104,11 +104,23 @@ func (t *TCCP) Render(ctx context.Context, cr infrastructurev1alpha2.AWSCluster,
 		params.RegistryDomain = t.config.RegistryDomain
 		params.SSOPublicKey = t.config.SSOPublicKey
 
-		ignitionPath := k8scloudconfig.GetIgnitionPath(t.config.IgnitionPath)
-		params.Files, err = k8scloudconfig.RenderFiles(ignitionPath, params)
+		ignitionBasePath := k8scloudconfig.GetIgnitionPath(t.config.IgnitionBasePath)
+		params.Files, err = k8scloudconfig.RenderFiles(ignitionBasePath, params)
 		if err != nil {
 			return nil, microerror.Mask(err)
 		}
+
+		var ignitionAdditions []string
+		{
+			for _, p := range t.config.IgnitionAdditionPaths {
+				additions, err := k8scloudconfig.GetIgnitionAdditions(p)
+				if err != nil {
+					return nil, microerror.Mask(err)
+				}
+				ignitionAdditions = append(ignitionAdditions, additions...)
+			}
+		}
+		params.Additions = ignitionAdditions
 	}
 
 	var templateBody []byte

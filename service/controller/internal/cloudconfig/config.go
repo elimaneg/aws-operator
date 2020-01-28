@@ -1,6 +1,8 @@
 package cloudconfig
 
 import (
+	"os"
+
 	"github.com/giantswarm/microerror"
 	"github.com/giantswarm/micrologger"
 
@@ -17,7 +19,8 @@ type Config struct {
 	CalicoSubnet              string
 	ClusterIPRange            string
 	DockerDaemonCIDR          string
-	IgnitionPath              string
+	IgnitionAdditionPaths     []string
+	IgnitionBasePath          string
 	ImagePullProgressDeadline string
 	KubeletExtraArgs          []string
 	NetworkSetupDockerImage   string
@@ -50,7 +53,13 @@ func (c Config) Validate() error {
 	if c.DockerDaemonCIDR == "" {
 		return microerror.Maskf(invalidConfigError, "%T.DockerDaemonCIDR must not be empty", c)
 	}
-	if c.IgnitionPath == "" {
+	for _, p := range c.IgnitionAdditionPaths {
+		_, err := os.Stat(p)
+		if err != nil {
+			return microerror.Maskf(invalidConfigError, "%T.IgnitionAdditionPaths must contain existing directories: %p does not exist", p)
+		}
+	}
+	if c.IgnitionBasePath == "" {
 		return microerror.Maskf(invalidConfigError, "%T.IgnitionPath must not be empty", c)
 	}
 	if c.ImagePullProgressDeadline == "" {

@@ -40,7 +40,8 @@ type clusterResourceSetConfig struct {
 	GuestPublicSubnetMaskBits  int
 	GuestSubnetMaskBits        int
 	IncludeTags                bool
-	IgnitionPath               string
+	IgnitionAdditionPaths      []string
+	IgnitionBasePath           string
 	ImagePullProgressDeadline  string
 	InstallationName           string
 	IPAMNetworkRange           net.IPNet

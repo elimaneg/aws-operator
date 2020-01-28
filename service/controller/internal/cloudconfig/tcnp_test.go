@@ -10,7 +10,7 @@ import (
 
 	infrastructurev1alpha2 "github.com/giantswarm/apiextensions/pkg/apis/infrastructure/v1alpha2"
 	"github.com/giantswarm/certs"
-	k8scloudconfig "github.com/giantswarm/k8scloudconfig/v_4_7_0"
+	k8scloudconfig "github.com/giantswarm/k8scloudconfig/v_5_1_0"
 	"github.com/giantswarm/randomkeys"
 	"github.com/google/go-cmp/cmp"
 
@@ -54,7 +54,7 @@ func Test_Controller_CloudConfig_TCNP_Template_Render(t *testing.T) {
 
 			var tcnp *TCNP
 			{
-				ignitionPath, err := k8scloudconfig.GetPackagePath()
+				ignitionBasePath, err := k8scloudconfig.GetPackagePath()
 				if err != nil {
 					t.Fatal(err)
 				}
@@ -69,7 +69,7 @@ func Test_Controller_CloudConfig_TCNP_Template_Render(t *testing.T) {
 						CalicoSubnet:              "172.18.128.0",
 						ClusterIPRange:            "172.18.192.0/22",
 						DockerDaemonCIDR:          "172.18.224.1/19",
-						IgnitionPath:              ignitionPath,
+						IgnitionBasePath:          ignitionBasePath,
 						ImagePullProgressDeadline: "1m",
 						NetworkSetupDockerImage:   "quay.io/giantswarm/k8s-setup-network-environment",
 						RegistryDomain:            "quay.io",

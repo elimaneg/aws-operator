@@ -133,7 +133,8 @@ func mainE(ctx context.Context) error {
 
 	daemonCommand.PersistentFlags().Bool(f.Service.Feature.LabelSelector.Enabled, false, "When it is set to `true` controller uses aws-operator.giantswarm.io/version label to filter watched AWSConfig CRs.")
 
-	daemonCommand.PersistentFlags().String(f.Service.Guest.Ignition.Path, "/opt/ignition", "Default path for the ignition base directory.")
+	daemonCommand.PersistentFlags().StringSlice(f.Service.Guest.Ignition.AdditionPath, []string{}, "List of ignition additions path.")
+	daemonCommand.PersistentFlags().String(f.Service.Guest.Ignition.BasePath, "/opt/ignition", "Default path for the ignition base directory.")
 	daemonCommand.PersistentFlags().String(f.Service.Guest.SSH.SSOPublicKey, "", "Public key for trusted SSO CA.")
 
 	daemonCommand.PersistentFlags().String(f.Service.Installation.Name, "", "Installation name for tagging AWS resources.")

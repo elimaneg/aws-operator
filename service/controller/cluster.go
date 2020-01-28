@@ -39,7 +39,8 @@ type ClusterConfig struct {
 	GuestSubnetMaskBits        int
 	GuestUpdateEnabled         bool
 	HostAWSConfig              aws.Config
-	IgnitionPath               string
+	IgnitionAdditionPaths      []string
+	IgnitionBasePath           string
 	ImagePullProgressDeadline  string
 	IncludeTags                bool
 	InstallationName           string
@@ -206,7 +207,8 @@ func newClusterResourceSets(config ClusterConfig) ([]*controller.ResourceSet, er
 			GuestPrivateSubnetMaskBits: config.GuestPrivateSubnetMaskBits,
 			GuestPublicSubnetMaskBits:  config.GuestPublicSubnetMaskBits,
 			GuestSubnetMaskBits:        config.GuestSubnetMaskBits,
-			IgnitionPath:               config.IgnitionPath,
+			IgnitionAdditionPaths:      config.IgnitionAdditionPaths,
+			IgnitionBasePath:           config.IgnitionBasePath,
 			ImagePullProgressDeadline:  config.ImagePullProgressDeadline,
 			IncludeTags:                config.IncludeTags,
 			InstallationName:           config.InstallationName,
