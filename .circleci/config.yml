@@ -1,5 +1,5 @@
 orbs:
-  architect: giantswarm/architect@0.4.3
+  architect: giantswarm/architect@dev:move-lint-to-test-jobs
 
 version: 2.1
 jobs:
